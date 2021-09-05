@@ -3,7 +3,7 @@ class ChatService {
     private var msgId = 0
     private val chats = mutableListOf<Chat>()
 
-    private fun createChat(senderId: Int, receiverId: Int): Chat {
+    fun createChat(senderId: Int, receiverId: Int): Chat {
         chatId++
         val chat = Chat(chatId, senderId, receiverId)
         chats += chat
@@ -18,7 +18,7 @@ class ChatService {
         msgId++
         val newMsg = Message(msgId, senderId, receiverId, textMsg)
 
-        chats.find { it.receiverId == receiverId }?.messages?.add(newMsg) ?:
+        chats.find { (it.senderId == senderId && it.receiverId == receiverId) }?.messages?.add(newMsg) ?:
         createChat(senderId, receiverId).messages.add(newMsg)
     }
 
