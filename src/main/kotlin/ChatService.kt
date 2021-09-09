@@ -29,16 +29,16 @@ class ChatService {
         }}
     }
 
-    fun getMessagesFromChat(chatId: Int, lastMsgId: Int): MutableList<Message> {
-        val messagesList = mutableListOf<Message>()
-        val messages = chats.find { it.chatId == chatId }?.messages ?: throw ChatNotFoundException()
+    fun getMessagesFromChat(chatId: Int, lastMsgId: Int, count: Int): List<Message> {
+        val chat = chats.find { it.chatId == chatId } ?: throw ChatNotFoundException()
 
-        messages.forEach { if(it.msgId >= lastMsgId) {
-            it.isReaded = true
-            messagesList.add(it)
-        } }
+        val messageList = chat.messages
+            .takeLastWhile { lastMsgId != it.msgId }
+            .take(count)
 
-        return messagesList
+        messageList.forEach { it.isReaded = true }
+
+        return messageList
     }
 
     fun getAllMessagesFromChat(chatId: Int): MutableList<Message> {

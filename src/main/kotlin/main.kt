@@ -10,7 +10,7 @@ fun main() {
     println()
     chatService.deleteChat(3)
     chatService.deleteMsg(4)
-    println(chatService.getMessagesFromChat(1,0))
+    println(chatService.getMessagesFromChat(1,1, 1))
     chatService.getUnreadChatsCount(1)
     chatService.getChats(1)
 

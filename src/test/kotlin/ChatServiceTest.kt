@@ -35,7 +35,7 @@ class ChatServiceTest {
 
         service.createMsg(msg1.senderId, msg1.receiverId, msg1.text)
         service.createMsg(msg2.senderId, msg2.receiverId, msg2.text)
-        val result = service.getMessagesFromChat(1, 0)
+        val result = service.getMessagesFromChat(1, 0, 3)
 
         assertEquals(result, expected)
     }
@@ -61,7 +61,7 @@ class ChatServiceTest {
     fun getMessagesFromChat_Exception() {
         val service = ChatService()
         service.createMsg(1, 2, "Тест1")
-        service.getMessagesFromChat(2, 0)
+        service.getMessagesFromChat(2, 0, 3)
     }
 
     @Test
@@ -75,7 +75,7 @@ class ChatServiceTest {
 
         service.createMsg(msg1.senderId, msg1.receiverId, msg1.text)
         service.createMsg(msg2.senderId, msg2.receiverId, msg2.text)
-        val result = service.getMessagesFromChat(1, 0)
+        val result = service.getMessagesFromChat(1, 0, 3)
 
         assertEquals(result, expected)
     }
